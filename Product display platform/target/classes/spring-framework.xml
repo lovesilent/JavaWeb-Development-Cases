@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+	<!-- 加载配置文件 -->
+	<bean id="placeholder" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<!-- jdbc配置 -->
+				<value>classpath:properties/jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 激活自动代理功能  暂时不需要用 因为还没有定义AOP-Aspect -->
+	<!-- <aop:aspectj-autoproxy proxy-target-class="true" />  -->
+	
+	<import resource="spring/*.xml"/>
+</beans>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wyln.webset.mapper.PictureMapper">
+	<resultMap id="picture" type="Picture">
+		<result property="id" column="id" />
+		<result property="itemId" column="item_id" />
+		<result property="name" column="name" />
+		<result property="url" column="url" />
+		<result property="isDef" column="is_def" />
+	</resultMap>
+	<!-- 添加数据 -->
+	<insert id="addPicture" parameterType="Picture">
+		INSERT INTO picture
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="itemId != null">
+				item_id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="url != null">
+				url,
+			</if>
+			<if test="isDef != null">
+				is_def,
+			</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id},
+			</if>
+			<if test="itemId != null">
+				#{itemId},
+			</if>
+			<if test="name != null">
+				#{name},
+			</if>
+			<if test="url != null">
+				#{url},
+			</if>
+			<if test="isDef != null">
+				#{isDef},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 根据主键更新 -->
+	<update id="updatePicture" parameterType="Picture">
+		UPDATE picture
+		<set>
+			<trim suffixOverrides=",">
+				<if test="id != null">
+					id = #{id},
+				</if>
+				<if test="itemId != null">
+					item_id = #{itemId},
+				</if>
+				<if test="name != null">
+					name = #{name},
+				</if>
+				<if test="url != null">
+					url = #{url},
+				</if>
+				<if test="isDef != null">
+					is_def = #{isDef},
+				</if>
+			</trim>
+		</set>
+		WHERE
+		id=#{id}
+	</update>
+
+	<!-- 根据主键删除 -->
+	<delete id="deleteByKey" parameterType="Long">
+		DELETE FROM picture
+		WHERE
+		id=#{id}
+	</delete>
+
+	<!-- 根据主键批量删除 -->
+	<delete id="deleteByKeys">
+		DELETE FROM picture
+		WHERE
+		id in
+		<foreach collection="list" separator="," item="id" open="("
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 根据iid删除 -->
+	<delete id="deleteByIid" parameterType="Long">
+		DELETE FROM picture
+		WHERE
+		item_id=#{id}
+	</delete>
+
+	<!-- 根据cid批量删除 -->
+	<delete id="deleteByIids">
+		DELETE FROM picture
+		WHERE
+		item_id in
+		<foreach collection="list" separator="," item="id" open="("
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 根据主键查询 -->
+	<select id="getPictureByKey" resultMap="picture" parameterType="Long">
+		SELECT
+		id,item_id,name,url,is_def FROM picture
+		WHERE
+		id=#{id}
+	</select>
+	<select id="getPicturesByKeys" resultMap="picture" parameterType="ArrayList">
+		SELECT id,item_id,name,url,is_def FROM picture
+		WHERE
+		id in
+		<foreach collection="list" separator="," item="id" open="("
+			close=")">
+			#{id}
+		</foreach>
+	</select>
+	
+	<!-- 根据ItemId查询 -->
+	<select id="getPictureByIid" resultMap="picture" parameterType="Long">
+		SELECT
+		id,item_id,name,url,is_def FROM picture
+		WHERE
+		item_id=#{id}
+	</select>
+	
+	<!-- 根据ItemId查询默认图片 -->
+	<select id="getPictureDefault" resultMap="picture" parameterType="Long">
+		SELECT
+		id,item_id,name,url,is_def FROM picture
+		WHERE
+		item_id=#{id} and is_def=1
+	</select>
+	
+
+</mapper>

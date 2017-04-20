@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wyln.webset.mapper.ItemMapper">
+	<resultMap id="item" type="Item">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="categoryId" column="category_id" />
+		<result property="price" column="price" />
+		<result property="description" column="description" />
+		<result property="date" column="date" />
+	</resultMap>
+	<!-- 添加数据 -->
+	<insert id="addItem" parameterType="Item">
+		INSERT INTO item
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="categoryId != null">
+				category_id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="price != null">
+				price,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="date != null">
+				date,
+			</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id},
+			</if>
+			<if test="categoryId != null">
+				#{categoryId},
+			</if>
+			<if test="name != null">
+				#{name},
+			</if>
+			<if test="price != null">
+				#{price},
+			</if>
+			<if test="description != null">
+				#{description},
+			</if>
+			<if test="date != null">
+				#{date},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 根据主键更新 -->
+	<update id="updateItem" parameterType="Item">
+		UPDATE item
+		<set>
+			<trim suffixOverrides=",">
+				<if test="id != null">
+					id = #{id},
+				</if>
+				<if test="categoryId != null">
+					category_id = #{categoryId},
+				</if>
+				<if test="name != null">
+					name = #{name},
+				</if>
+				<if test="price != null">
+					price = #{price},
+				</if>
+				<if test="description != null">
+					description = #{description},
+				</if>
+				<if test="date != null">
+					date = #{date},
+				</if>
+			</trim>
+		</set>
+		WHERE
+		id=#{id}
+	</update>
+
+	<!-- 根据主键删除 -->
+	<delete id="deleteByKey" parameterType="Long">
+		DELETE FROM item
+		WHERE
+		id=#{id}
+	</delete>
+
+	<!-- 根据主键批量删除 -->
+	<delete id="deleteByKeys">
+		DELETE FROM item
+		WHERE
+		id in
+		<foreach collection="list" separator="," item="id" open="("
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<!-- 根据cid删除 -->
+	<delete id="deleteByCid" parameterType="Long">
+		DELETE FROM item
+		WHERE
+		category_id=#{id}
+	</delete>
+
+	<!-- 根据cid批量删除 -->
+	<delete id="deleteByCids">
+		DELETE FROM item
+		WHERE
+		category_id in
+		<foreach collection="list" separator="," item="id" open="("
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<!-- 根据主键查询 -->
+	<select id="getItemByKey" resultMap="item" parameterType="Long">
+		SELECT
+		id,category_id,name,price,description,date FROM item
+		WHERE
+		id=#{id}
+	</select>
+	<select id="getItemsByKeys" resultMap="item" parameterType="ArrayList">
+		SELECT id,category_id,name,price,description,date FROM item
+		WHERE
+		id in
+		<foreach collection="list" separator="," item="id" open="("
+			close=")">
+			#{id}
+		</foreach>
+	</select>
+
+	<!-- 根据CategoryId查询 -->
+	<select id="getItemByCid" resultMap="item" parameterType="Long">
+		SELECT
+		id,category_id,name,price,description,date FROM item
+		WHERE
+		category_id=#{id}
+	</select>
+
+	<!-- 分页 -->
+	<select id="getItemsWithPage" parameterType="Item" resultMap="item">
+		SELECT id,category_id,name,price,description,date FROM item
+		WHERE category_id=#{categoryId}
+		<if test="startRow != null">
+			limit #{startRow},#{pageSize}
+		</if>
+	</select>
+	<!-- 数据总数 -->
+	<select id="getItemsCount" parameterType="Long" resultType="int">
+		SELECT count(1) FROM item
+		WHERE category_id=#{id}
+	</select>
+
+</mapper>

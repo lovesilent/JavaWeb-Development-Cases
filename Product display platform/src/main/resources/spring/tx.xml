@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+	
+	<!-- 组件扫描 service -->
+	<context:component-scan base-package="com.wyln.webset.service" />
+	
+	<!-- 采用Annotation配置事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<!-- 使用JDBC事务 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- AOP配置事务 -->
+	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" propagation="REQUIRED"/>
+			<tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="add*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="*" propagation="REQUIRED"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 配置AOP切点及通知 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.wyln.webset.service.impl..*.*(..))" id="transcationPointcut"/>
+		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="transcationPointcut"/>
+	</aop:config>
+</beans>

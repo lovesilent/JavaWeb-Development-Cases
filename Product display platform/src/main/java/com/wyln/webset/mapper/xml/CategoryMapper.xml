@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wyln.webset.mapper.CategoryMapper">
+	<!-- 添加数据 -->
+	<insert id="addCategory" parameterType="Category">
+		INSERT INTO category
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="date != null">
+				date,
+			</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id},
+			</if>
+			<if test="name != null">
+				#{name},
+			</if>
+			<if test="date != null">
+				#{date},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 根据主键更新 -->
+	<update id="updateCategory" parameterType="Category">
+		UPDATE category
+		<set>
+			<trim suffixOverrides=",">
+				<if test="id != null">
+					id = #{id},
+				</if>
+				<if test="name != null">
+					name = #{name},
+				</if>
+				<if test="date != null">
+					date = #{date},
+				</if>
+			</trim>
+		</set>
+		WHERE
+		id=#{id}
+	</update>
+
+	<!-- 根据主键删除 -->
+	<delete id="deleteByKey" parameterType="Long">
+		DELETE FROM category
+		WHERE
+		id=#{id}
+	</delete>
+
+	<!-- 根据主键批量删除 -->
+	<delete id="deleteByKeys">
+		DELETE FROM category
+		WHERE
+		id in
+		<foreach collection="list" separator="," item="id" open="("
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<!-- 根据主键查询 -->
+	<select id="getCategoryByKey"  resultType="Category" parameterType="Long">
+		SELECT id,name,date FROM category
+		WHERE
+		id=#{id}
+	</select>
+	<select id="getCategorysByKeys" resultType="Category" parameterType="ArrayList">
+		SELECT id,name,date FROM category
+		WHERE
+		id in
+		<foreach collection="list" separator="," item="id" open="("
+			close=")">
+			#{id}
+		</foreach>
+	</select>
+	
+	<!-- 获取所有数据 -->
+	<select id = "getCategoryList" resultType="Category">
+		SELECT * FROM category
+	</select>
+	
+	<!-- 最多获取4条数据 -->
+	<select id = "getCategoryLimit" resultType="Category">
+		SELECT * FROM category 
+		limit 0,4
+	</select>
+
+</mapper>

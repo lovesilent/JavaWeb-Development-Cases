@@ -1,0 +1,242 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.wyln</groupId>
+	<artifactId>webset</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>webset</name>
+	<url>http://maven.apache.org</url>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Tommy</name>
+			<email>love_silent@126.com</email>
+		</developer>
+		<developer>
+			<name>NaNaSama</name>
+			<email>1123559808@qq.com</email>
+		</developer>
+	</developers>
+
+	<properties>
+		<project.bulid.sourceEncoding>UTF-8</project.bulid.sourceEncoding>
+		<spring.version>4.3.3.RELEASE</spring.version>
+		<aspectjweaver.version>1.8.9</aspectjweaver.version>
+		<slf4j.version>1.7.21</slf4j.version>
+
+		<!-- mybatis -->
+		<mybatis.version>3.4.4</mybatis.version>
+		<mybatis-spring.version>1.3.1</mybatis-spring.version>
+
+		<!-- provided -->
+		<servlet-api.version>3.0.1</servlet-api.version>
+		<jstl.version>1.2</jstl.version>
+		<scribejava-core.version>2.5.3</scribejava-core.version>
+		
+		<!-- json -->
+		<json.version>20131018</json.version>
+
+		<!-- data -->
+		<druid.version>1.0.18</druid.version>
+		<mysql-connector-java.version>5.1.41</mysql-connector-java.version>
+
+		<!-- jesey -->
+		<jersey-client.version>1.18.1</jersey-client.version>
+
+		<!-- fileupload -->
+		<commons-fileupload.version>1.2.2</commons-fileupload.version>
+		
+		<!-- apache commons -->
+		<org.apache.commons.lang3.version>3.1</org.apache.commons.lang3.version>
+		<org.apache.commons.io.version>1.3.2</org.apache.commons.io.version>
+		
+		<!-- test -->
+		<junit.version>4.12</junit.version>
+
+	</properties>
+
+	<dependencies>
+		<!-- spring begin -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectjweaver.version}</version>
+		</dependency>
+		<!-- spring end -->
+
+		<!-- mybatis begin -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>${mybatis-spring.version}</version>
+		</dependency>
+		<!-- mybatis end -->
+
+		<!-- provided begin -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet-api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- provided end -->
+		
+		<!-- jstl begin -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
+		<!-- jstl end -->
+		
+		<!-- json begin -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>${json.version}</version>
+		</dependency>
+		<!-- json end -->
+		
+		<!-- oauth2.0-login begin -->
+		<dependency>
+			<groupId>com.github.scribejava</groupId>
+			<artifactId>scribejava-core</artifactId>
+			<version>${scribejava-core.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- oauth2.0-login end -->
+
+		<!-- log begin -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<!-- log end -->
+
+		<!-- data begin -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-connector-java.version}</version>
+		</dependency>
+		<!-- data end -->
+		
+		<!-- jesey begin -->
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>${jersey-client.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-core</artifactId>
+			<version>${jersey-client.version}</version>
+		</dependency>
+		<!-- jesey end -->
+		
+		<!-- fileupload begin-->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>${commons-fileupload.version}</version>
+		</dependency>
+		<!-- fileupload end -->
+		
+		<!-- apache commons begin -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${org.apache.commons.lang3.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${org.apache.commons.io.version}</version>
+		</dependency>
+		<!-- apache commons end -->
+		
+		<!-- test begin -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- test end -->
+		
+		<!--page begin-->
+		<dependency>
+			<groupId>cn.itcast</groupId>
+			<artifactId>page</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- page end -->
+	</dependencies>
+	
+	<build>
+		<finalName>webset</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<url>http://localhost:8080/manager/text</url>
+					<path>/</path>
+					<server>tomcat</server>
+					<username>tomcat</username>
+					<password>123456</password>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
