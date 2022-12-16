@@ -28,7 +28,7 @@
 
 	<properties>
 		<project.bulid.sourceEncoding>UTF-8</project.bulid.sourceEncoding>
-		<spring.version>4.3.3.RELEASE</spring.version>
+		<spring.version>5.2.20.RELEASE</spring.version>
 		<aspectjweaver.version>1.8.9</aspectjweaver.version>
 		<slf4j.version>1.7.21</slf4j.version>
 
